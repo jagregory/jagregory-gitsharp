@@ -1,3 +1,4 @@
-h1. Git# - A .Net Git implementation
+Git# - A .Net Git implementation
+================================
 
 For tickets see: [Git# Lighthouse](http://gitsharp.lighthouseapp.com/dashboard)
