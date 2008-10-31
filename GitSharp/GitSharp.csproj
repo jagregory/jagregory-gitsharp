@@ -54,6 +54,7 @@
     <Compile Include="Git.cs" />
     <Compile Include="GitObject.cs" />
     <Compile Include="Init.cs" />
+    <Compile Include="ObjectDatabase.cs" />
     <Compile Include="ObjectFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

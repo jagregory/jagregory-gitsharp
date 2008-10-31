@@ -52,6 +52,7 @@
     <Compile Include="CommitSpecificParsingTests.cs" />
     <Compile Include="CompressionTests.cs" />
     <Compile Include="InitTests.cs" />
+    <Compile Include="ObjectDatabaseTests.cs" />
     <Compile Include="ObjectFactoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
