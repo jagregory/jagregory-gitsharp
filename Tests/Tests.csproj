@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommitSpecificParsingTests.cs" />
     <Compile Include="CompressionTests.cs" />
     <Compile Include="InitTests.cs" />
     <Compile Include="ObjectFactoryTests.cs" />

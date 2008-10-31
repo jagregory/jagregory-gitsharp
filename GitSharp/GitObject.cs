@@ -12,7 +12,7 @@ namespace GitSharp
 
         protected virtual void LoadHeader(string header)
         {
-            ContentLength = long.Parse(header.Substring(header.IndexOf(' ')));
+            ContentLength = long.Parse(header.Substring(header.IndexOf(' ') + 1));
         }
 
         protected abstract void LoadBody(string body);
