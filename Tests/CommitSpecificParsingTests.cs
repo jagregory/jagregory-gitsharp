@@ -6,8 +6,21 @@ namespace Tests
     [TestFixture]
     public class CommitSpecificParsingTests
     {
-        private const string CommitContent = "commit 187\0tree f37a9edbaa5601df27dcc24df5fcff752314b3ec\nauthor James Gregory <james@jagregory.com> 1225463078 +0000\ncommitter James Gregory <james@jagregory.com> 1225463078 +0000\n\nAdded first file\n";
-        
+        private GitObjectStream CommitContent;
+
+        [SetUp]
+        public void CreateStream()
+        {
+            CommitContent = "commit 187\0tree f37a9edbaa5601df27dcc24df5fcff752314b3ec\nauthor James Gregory <james@jagregory.com> 1225463078 +0000\ncommitter James Gregory <james@jagregory.com> 1225463078 +0000\n\nAdded first file\n"
+                .ToGitObjectStream();
+        }
+
+        [TearDown]
+        public void DestroyStream()
+        {
+            CommitContent.Dispose();
+        }
+
         [Test]
         public void ParsesTreeHashId()
         {

@@ -6,7 +6,20 @@ namespace Tests
     [TestFixture]
     public class ObjectFactoryTests
     {
-        private const string FakeCommitContent = "commit 1234\0Body";
+        private GitObjectStream FakeCommitContent;
+
+        [SetUp]
+        public void CreateStream()
+        {
+            FakeCommitContent = "commit 1234\0Body"
+                .ToGitObjectStream();
+        }
+
+        [TearDown]
+        public void DestroyStream()
+        {
+            FakeCommitContent.Dispose();
+        }
 
         [Test]
         public void ContentWithCommitHeaderReturnsCommitObject()

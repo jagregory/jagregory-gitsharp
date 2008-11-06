@@ -1,16 +1,15 @@
-using System;
 using System.IO;
 
 namespace GitSharp
 {
-    public class Compression
+    public class Zlib
     {
-        public string Decompress(string path)
+        public byte[] Decompress(string path)
         {
             return Decompress(new FileStream(path, FileMode.Open));
         }
 
-        public string Decompress(Stream input)
+        public byte[] Decompress(Stream input)
         {
             using (var output = new MemoryStream())
             using (var zipStream = new zlib.ZOutputStream(output))
@@ -29,8 +28,11 @@ namespace GitSharp
                 // reset output stream to start so we can read it to a string
                 output.Position = 0;
 
-                using (var reader = new StreamReader(output))
-                    return reader.ReadToEnd();
+                byte[] content = new byte[output.Length];
+
+                output.Read(content, 0, (int)output.Length);
+
+                return content;
             }
         }
     }

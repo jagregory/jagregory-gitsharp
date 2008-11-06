@@ -2,8 +2,9 @@ namespace GitSharp
 {
     public class Commit : GitObject
     {
-        protected override void LoadBody(string body)
+        protected override void LoadBody(GitObjectStream content)
         {
+            var body = content.ReadToEnd().ToAsciiString();
             var lines = body.Split('\n');
 
             foreach (var line in lines)

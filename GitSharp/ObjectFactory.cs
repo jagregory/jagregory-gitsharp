@@ -4,21 +4,31 @@ namespace GitSharp
 {
     public class ObjectFactory
     {
-        public GitObject CreateFromContent(string content)
+        public GitObject CreateFromContent(GitObjectStream content)
         {
-            string[] headerAndRest = content.Split('\0');
-            string header = headerAndRest[0];
+            string type = ReadHeading(content);
 
             GitObject obj;
 
-            if (header.StartsWith("commit"))
+            if (type == "commit")
                 obj = new Commit();
+            else if (type == "tree")
+                obj = new Tree();
             else
                 throw new NotImplementedException("Support for file type is not implemented.");
+
+            content.Rewind();
 
             obj.Load(content);
 
             return obj;
-        }        
+        }
+
+        private string ReadHeading(GitObjectStream content)
+        {
+            byte[] word = content.ReadWord();
+
+            return new System.Text.ASCIIEncoding().GetString(word);
+        }
     }
 }

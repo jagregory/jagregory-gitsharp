@@ -10,8 +10,8 @@ namespace Tests
         [Test]
         public void CanDecompressFile()
         {
-            var compression = new Compression();
-            string value = compression.Decompress(@"Resources\commit");
+            var compression = new Zlib();
+            byte[] value = compression.Decompress(@"Resources\commit");
 
             // should do better than this!
             Assert.That(value, Is.Not.Null);

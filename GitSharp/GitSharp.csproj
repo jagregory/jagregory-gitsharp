@@ -50,13 +50,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commit.cs" />
-    <Compile Include="Compression.cs" />
     <Compile Include="Git.cs" />
+    <Compile Include="GitObjectStream.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="TreeEntry.cs" />
+    <Compile Include="Zlib.cs" />
     <Compile Include="GitObject.cs" />
     <Compile Include="Init.cs" />
     <Compile Include="ObjectDatabase.cs" />
+    <Compile Include="ObjectDatabase.cs" />
     <Compile Include="ObjectFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tree.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

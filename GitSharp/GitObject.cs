@@ -2,21 +2,35 @@ namespace GitSharp
 {
     public abstract class GitObject
     {
-        public void Load(string content)
+        public void Load(GitObjectStream content)
         {
-            var headAndBody = content.Split('\0');
-
-            LoadHeader(headAndBody[0]);
-            LoadBody(headAndBody[1]);
+            LoadHeader(content);
+            LoadBody(content);
         }
 
-        protected virtual void LoadHeader(string header)
+        protected virtual void LoadHeader(GitObjectStream content)
         {
-            ContentLength = long.Parse(header.Substring(header.IndexOf(' ') + 1));
+            Type = ReadType(content);
+            ContentLength = ReadContentLength(content);
         }
 
-        protected abstract void LoadBody(string body);
-        
+        private string ReadType(GitObjectStream content)
+        {
+            byte[] word = content.ReadWord();
+
+            return word.ToAsciiString();
+        }
+
+        private long ReadContentLength(GitObjectStream content)
+        {
+            byte[] word = content.ReadToNull();
+
+            return long.Parse(word.ToAsciiString());
+        }
+
+        protected abstract void LoadBody(GitObjectStream body);
+
+        public string Type { get; private set; }
         public long ContentLength { get; private set; }
     }
 }
