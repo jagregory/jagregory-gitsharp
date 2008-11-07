@@ -5,11 +5,11 @@ namespace GitSharp
 {
     public class ObjectDatabase
     {
-        private readonly Compression zip;
+        private readonly Zlib zip;
         private readonly ObjectFactory objectFactory;
         private readonly string objectDir;
 
-        public ObjectDatabase(string gitDir, Compression zip, ObjectFactory objectFactory)
+        public ObjectDatabase(string gitDir, Zlib zip, ObjectFactory objectFactory)
         {
             this.zip = zip;
             this.objectFactory = objectFactory;
@@ -18,7 +18,7 @@ namespace GitSharp
 
         // DI this!
         public ObjectDatabase(string gitDir)
-            : this(gitDir, new Compression(), new ObjectFactory())
+            : this(gitDir, new Zlib(), new ObjectFactory())
         {}
 
         public GitObject Find(string sha1Id)
@@ -39,8 +39,9 @@ namespace GitSharp
                 throw new InvalidOperationException("Could not find SHA1 file with path '" + fullPath + "'.");
 
             var uncompressedContent = zip.Decompress(fullPath);
+            var stream = new GitObjectStream(uncompressedContent);
 
-            return objectFactory.CreateFromContent(uncompressedContent);
+            return objectFactory.CreateFromContent(stream);
         }
     }
 }
