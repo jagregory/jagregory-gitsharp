@@ -13,6 +13,23 @@ namespace GitSharp
             stream = new MemoryStream(bytes);
         }
 
+        public byte[] ReadToNextNonNull()
+        {
+            var bytes = new List<byte>();
+
+            int current;
+
+            while ((current = stream.ReadByte()) == '\0')
+            {
+                bytes.Add((byte)current);
+            }
+
+            // knock it back a byte because we'll have grabbed one extra
+            stream.Position--;
+
+            return bytes.ToArray();
+        }
+
         public byte[] ReadToChar(char stop)
         {
             var bytes = new List<byte>();

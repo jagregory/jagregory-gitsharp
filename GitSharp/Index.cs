@@ -64,8 +64,10 @@ namespace GitSharp
             var size = content.ReadBytes(4);
             Signature = content.ReadBytes(20).ToHexString();
             var flags = content.ReadBytes(2);
-            
-            Name = content.ReadBytes(10).ToAsciiString().Replace("\0", ""); // this aint gunna work
+
+            Name = content.ReadToNull().ToAsciiString();
+
+            content.ReadToNextNonNull();
         }
     }
 
