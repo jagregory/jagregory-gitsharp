@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BlobSpecificParsingTests.cs" />
     <Compile Include="CommitSpecificParsingTests.cs" />
     <Compile Include="CompressionTests.cs" />
     <Compile Include="InitTests.cs" />
@@ -68,6 +69,9 @@
     <None Include="Resources\commit">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Content Include="Resources\blob">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\tree">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

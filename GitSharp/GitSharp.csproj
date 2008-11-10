@@ -49,6 +49,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Blob.cs" />
     <Compile Include="Commit.cs" />
     <Compile Include="Git.cs" />
     <Compile Include="GitObjectStream.cs" />

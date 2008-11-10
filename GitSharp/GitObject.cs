@@ -28,7 +28,7 @@ namespace GitSharp
             return long.Parse(word.ToAsciiString());
         }
 
-        protected abstract void LoadBody(GitObjectStream body);
+        protected abstract void LoadBody(GitObjectStream content);
 
         public string Type { get; private set; }
         public long ContentLength { get; private set; }

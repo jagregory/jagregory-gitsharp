@@ -14,6 +14,8 @@ namespace GitSharp
                 obj = new Commit();
             else if (type == "tree")
                 obj = new Tree();
+            else if (type == "blob")
+                obj = new Blob();
             else
                 throw new NotImplementedException("Support for file type is not implemented.");
 
