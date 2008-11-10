@@ -75,5 +75,16 @@ namespace GitSharp
         {
             get { return stream.Position >= stream.Length; }
         }
+
+        public long Position
+        {
+            get { return stream.Position; }
+            set { stream.Position = value; }
+        }
+
+        public long Length
+        {
+            get { return stream.Length; }
+        }
     }
 }

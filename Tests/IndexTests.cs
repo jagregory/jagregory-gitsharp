@@ -33,5 +33,15 @@ namespace Tests
             Assert.That(index.Header.Version, Is.EqualTo(2));
             Assert.That(index.Header.Entries, Is.EqualTo(2));
         }
+
+        [Test]
+        public void CanReadSignature()
+        {
+            var index = new Index();
+
+            index.Load(stream);
+
+            Assert.That(index.Sha1Signature, Is.EqualTo("4EB7F326D9A260C05AAA01C48F8A4DA8E3DF7801"));
+        }
     }
 }

@@ -5,11 +5,23 @@ namespace GitSharp
     public class Index
     {
         public IndexHeader Header { get; private set; }
+        public string Sha1Signature { get; private set; }
 
         public void Load(GitObjectStream content)
         {
+            ReadSignature(content);
+
             Header = new IndexHeader();
             Header.Load(content);
+        }
+
+        private void ReadSignature(GitObjectStream content)
+        {
+            content.Position = content.Length - 20;
+         
+            Sha1Signature = content.ReadToEnd().ToHexString();
+            
+            content.Rewind();
         }
     }
 
