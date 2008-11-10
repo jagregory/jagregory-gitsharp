@@ -52,6 +52,7 @@
     <Compile Include="BlobSpecificParsingTests.cs" />
     <Compile Include="CommitSpecificParsingTests.cs" />
     <Compile Include="CompressionTests.cs" />
+    <Compile Include="IndexTests.cs" />
     <Compile Include="InitTests.cs" />
     <Compile Include="ObjectDatabaseTests.cs" />
     <Compile Include="ObjectFactoryTests.cs" />
@@ -72,6 +73,9 @@
     <Content Include="Resources\blob">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\index">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\tree">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
