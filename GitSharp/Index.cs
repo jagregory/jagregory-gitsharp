@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace GitSharp
 {
@@ -6,6 +7,12 @@ namespace GitSharp
     {
         public IndexHeader Header { get; private set; }
         public string Sha1Signature { get; private set; }
+        public IList<IndexEntry> Entries { get; private set; }
+
+        public Index()
+        {
+            Entries = new List<IndexEntry>();
+        }
 
         public void Load(GitObjectStream content)
         {
@@ -13,6 +20,15 @@ namespace GitSharp
 
             Header = new IndexHeader();
             Header.Load(content);
+
+            while (content.Position < content.Length - 20)
+            {
+                var entry = new IndexEntry();
+
+                entry.Load(content);
+
+                Entries.Add(entry);
+            }
         }
 
         private void ReadSignature(GitObjectStream content)
@@ -22,6 +38,34 @@ namespace GitSharp
             Sha1Signature = content.ReadToEnd().ToHexString();
             
             content.Rewind();
+        }
+    }
+
+    public class IndexEntry
+    {
+        public IndexTime Created { get; private set; }
+        public IndexTime Modified { get; private set; }
+        public string Signature { get; private set; }
+        public string Name { get; private set; }
+
+        public void Load(GitObjectStream content)
+        {
+            Created = new IndexTime();
+            Created.Load(content);
+
+            Modified = new IndexTime();
+            Modified.Load(content);
+
+            var dev = content.ReadBytes(4);
+            var ino = content.ReadBytes(4);
+            var mode = content.ReadBytes(4);
+            var uid = content.ReadBytes(4);
+            var gid = content.ReadBytes(4);
+            var size = content.ReadBytes(4);
+            Signature = content.ReadBytes(20).ToHexString();
+            var flags = content.ReadBytes(2);
+            
+            Name = content.ReadBytes(10).ToAsciiString().Replace("\0", ""); // this aint gunna work
         }
     }
 
@@ -42,21 +86,8 @@ namespace GitSharp
             var entriesBytes = content.ReadBytes(EntriesSize);
 
             Signature = signatureBytes.ToAsciiString();
-            Version = ToInt32(versionBytes);
-            Entries = ToInt32(entriesBytes);
-        }
-
-        private int ToInt32(byte[] bytes)
-        {
-            // nasty
-            string value = "";
-
-            foreach (var b in bytes)
-            {
-                value += b.ToString();
-            }
-
-            return Convert.ToInt32(value);
+            Version = versionBytes.ToInt32();
+            Entries = entriesBytes.ToInt32();
         }
     }
 }

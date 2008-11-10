@@ -1,3 +1,5 @@
+using System;
+
 namespace GitSharp
 {
     public static class Extensions
@@ -22,6 +24,19 @@ namespace GitSharp
             }
             
             return hexString;
+        }
+
+        public static int ToInt32(this byte[] bytes)
+        {
+            // nasty
+            string value = "";
+
+            foreach (var b in bytes)
+            {
+                value += b.ToString();
+            }
+
+            return Convert.ToInt32(value);
         }
     }
 }

@@ -43,5 +43,17 @@ namespace Tests
 
             Assert.That(index.Sha1Signature, Is.EqualTo("4EB7F326D9A260C05AAA01C48F8A4DA8E3DF7801"));
         }
+
+        [Test]
+        public void CanReadFilenames()
+        {
+            var index = new Index();
+
+            index.Load(stream);
+
+            Assert.That(index.Entries.Count, Is.EqualTo(2));
+            Assert.That(index.Entries[0].Name, Is.EqualTo("AFile"));
+            Assert.That(index.Entries[1].Name, Is.EqualTo("test"));
+        }
     }
 }

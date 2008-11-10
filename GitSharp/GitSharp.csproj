@@ -55,6 +55,7 @@
     <Compile Include="GitObjectStream.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Index.cs" />
+    <Compile Include="IndexTime.cs" />
     <Compile Include="TreeEntry.cs" />
     <Compile Include="Zlib.cs" />
     <Compile Include="GitObject.cs" />
